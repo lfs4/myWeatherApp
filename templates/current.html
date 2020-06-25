@@ -25,10 +25,9 @@
         <div class="full-height" layer=3 id="layer-3">
           <div class="full-height" layer=4 id="layer-4"> -->
 
-      <h2>Weather In {{request_data.name}}</h2>
-  <p>{{request_data["weather"][0].main}}</p>
+  <h2>Weather In {{request_data.name}}</h2>
 
-  {{request_data["weather"][0].description}}
+  <p>Right now it's {{request_data["weather"][0].description}}</p>
 
 
   Temp: <span id="temp">{{request_data["main"].temp}}</span>
@@ -38,10 +37,10 @@
   Pressure: {{request_data["main"].pressure}}
   <br>
   Humidity: {{request_data["main"].humidity}}
-  <br>
+  <!-- <br>
   Sunset: {{request_data["sys"].sunset}}
   <br>
-  Sunrise: {{request_data["sys"].sunrise}}
+  Sunrise: {{request_data["sys"].sunrise}} -->
 <!-- </div>
 </div>
 </div> -->

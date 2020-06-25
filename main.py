@@ -41,7 +41,8 @@ def getBackgroundImage(tag):
 
 
 def getWeatherHourly(city):
-    r = requests.get(f"https://api.openweathermap.org/data/2.5/forcast/hourly?q={city}&appid=d6b5eb04a714a1bbeb1771261b1a2c47")
+    r = requests.get(f"https://api.openweathermap.org/data/2.5/forcast/hourly?q={city}&units=imperial&appid=d6b5eb04a714a1bbeb1771261b1a2c47")
+    print(f"https://api.openweathermap.org/data/2.5/forcast/hourly?q={city}&units=imperial&appid=d6b5eb04a714a1bbeb1771261b1a2c47",file=sys.stdout)
     return proccessJson(r)
 
 def getCurrentWeather(city):
@@ -56,16 +57,16 @@ def currentWeather(city):
     background = getBackgroundImage(imgSearchTag)
     return render_template("current.html",request_data=json_ob , img_data=imgSearchTag, bg=background)
 
-@app.route('/hourly/<city>')
+@app.route('/weather/hourly/<city>')
 def hourlyWeather(city):
     json_ob = getWeatherHourly(city)
-
+    # getWeatherHourly(city)
 
     return render_template("hourly.html",request_data=json_ob)
 
 @app.route('/weather/<city>.json')
 def dumpJson(city):
-    return returnApiJson(city);
+    return getCurrentWeather(city);
 
 
 @app.route('/weather/<city>.html')
