@@ -37,8 +37,11 @@ def getBackgroundImage(tag):
     print(img, file=sys.stdout)
     return buildImgUrl(img)
 
-
-
+def allImages(tag):
+    r = requests.get(f"https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=0a12eec13a89cc01a758a10671c78fcc&tags={tag}&safe_search=&format=json&nojsoncallback=1")
+    jData = proccessJson(r)
+    photos = jData["photos"]["photo"]
+    return photos
 
 def getWeatherHourly(city):
     r = requests.get(f"https://api.openweathermap.org/data/2.5/forcast/hourly?q={city}&units=imperial&appid=d6b5eb04a714a1bbeb1771261b1a2c47")
@@ -56,6 +59,18 @@ def currentWeather(city):
     imgSearchTag = json_ob["weather"][0]['description']
     background = getBackgroundImage(imgSearchTag)
     return render_template("current.html",request_data=json_ob , img_data=imgSearchTag, bg=background)
+
+@app.route('/weather/<city>/images')
+def cityimg(city):
+    d = getCurrentWeather(city)
+    tag = d["weather"][0]['description']
+    imgList = []
+    aI = allImages(tag)
+    for i in aI:
+        imgList.append(buildImgUrl(i))
+    print(imgList, file=sys.stdout)
+    return render_template("images.html", request_data=imgList, name=city, tagtype=tag)
+
 
 @app.route('/weather/hourly/<city>')
 def hourlyWeather(city):

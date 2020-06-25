@@ -18,9 +18,14 @@
 
 
 
-  <div class="container-fluid full-height">
-
-  {{request_data}}
+  <div class="container-fluid full-height" style="background-color:none;">
+    <h1>Tag type for {{name}} is {{tagtype}}
+      <br>
+      <br>
+  {% for items in request_data %}
+    <img src={{items}}>
+    <br>
+  {% endfor %}
   </div>
 
 </div>
