@@ -45,7 +45,7 @@ def getWeatherHourly(city):
     return proccessJson(r)
 
 def getCurrentWeather(city):
-    r = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid=d6b5eb04a714a1bbeb1771261b1a2c47")
+    r = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city}&units=imperial&appid=d6b5eb04a714a1bbeb1771261b1a2c47")
 
     return proccessJson(r)
 
